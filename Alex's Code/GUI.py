@@ -30,7 +30,25 @@ class GUI:
         self.socket = s
         self.my_msg = ""
         self.system_msg = ""
-        self.image=PhotoImage(file="pict_1.png") #只需要改image路径即可
+        self.image=PhotoImage(file="pict_1.png") #改这个路径即可
+
+    #加入了账号密码判断,已经实现了只有在txt中的账号密码可以登录
+    def login_flag(self):
+        self.login_dict={self.entry_username.get():self.entry_password.get()}
+        flag=0
+        f=open("login.txt","r")
+        line_list=f.readlines()
+        data_dict={}
+        for item in line_list:
+            if item[-1] == '\n':
+                item = item[:-1]
+            temp_list=item.split(",")
+            data_dict[temp_list[0]]=temp_list[1]
+        f.close()
+        for keys,values in data_dict.items():
+            if keys==self.entry_username.get() and values==self.entry_password.get():
+                flag=1
+        return flag
 
     def login(self):
         # login window
@@ -62,28 +80,49 @@ class GUI:
 
         # create a entry box for
         # tyoing the message
-        self.entryName = Entry(self.login,
+        self.entry_username = Entry(self.login,
                                font="Helvetica 14")
 
-        self.entryName.place(relwidth=0.4,
+        self.entry_username.place(relwidth=0.4,
                              relheight=0.1,
                              relx=0.35,
                              rely=0.45)
 
         # set the focus of the curser
-        self.entryName.focus()
+        self.entry_username.focus()
 
+        #第二个label
+        self.label_password = Label(self.login,
+                               text="Password: ",
+                               font="Helvetica 12")
+
+        self.label_password.place(relheight=0.1,
+                             relx=0.1,
+                             rely=0.65)
+
+        #第二个entry
+        self.entry_password = Entry(self.login,
+                               font="Helvetica 14")
+
+        self.entry_password.place(relwidth=0.4,
+                             relheight=0.1,
+                             relx=0.35,
+                             rely=0.65)
+
+        self.entry_password.focus()
+
+        #这个是continue button
         self.go = Button(self.login,
-                         text="CONTINUE",
+                         text="Login",
                          font="Helvetica 14 bold",
-                         command=lambda: self.goAhead(self.entryName.get()))
+                         command=lambda: self.goAhead(self.entry_username.get()))
 
         self.go.place(relx=0.4,
                       rely=0.8)
         self.Window.mainloop()
 
     def goAhead(self, name):
-        if len(name) > 0:
+        if len(name) > 0 and self.login_flag()==1:
             msg = json.dumps({"action": "login", "name": name})
             self.send(msg)
             response = json.loads(self.recv())
