@@ -132,7 +132,9 @@ class GUI:
         self.go = Button(self.login,
                          text="Login",
                          font=("Trebuchet MS", 14, "bold"),
-                         command=lambda: self.goAhead(self.entry_username.get()))
+                        #  command= self.goAhead(self.entry_username.get())
+                        command= self.pressLogin
+                         )
 
         self.go.place(relx=0.25,
                       rely=0.85)
@@ -141,11 +143,17 @@ class GUI:
         self.register=Button(self.login,
                               text="Register",
                               font=("Trebuchet MS", 14, "bold"),
-                              command=lambda: self.reg())
+                              command=self.reg)
+
         self.register.place(relx=0.55,
                             rely=0.85)
         
         self.Window.mainloop()
+
+    def pressLogin(self):
+        self.goAhead(self.entry_username.get())
+        print(1111)
+
 
     def reg(self):
 
@@ -163,70 +171,67 @@ class GUI:
         print("here")
 
         # create a Label
-        self.label_user_name = Label(self.reg,
+        self.label_set_username = Label(self.reg,
                                text="Username",
-                               font=("Trebuchet MS", 12))
+                               font=("Trebuchet MS", 12),
+                               textvariable=self.entry_username.get())
 
-        self.label_user_name.place(relheight=0.1,
+        self.label_set_username.focus()
+
+        self.label_set_username.place(relheight=0.1,
                              relx=0.1,
                              rely=0.1)
 
         # create a entry box for
         # typing the message
-        self.entry_username = Entry(self.reg,
+        self.entry_set_username = Entry(self.reg,
                                font=("Trebuchet MS",12),
                                )
 
-        self.entry_username.place(relwidth=0.60,
+        self.entry_set_username.place(relwidth=0.60,
                              relheight=0.1,
                              relx=0.3,
                              rely=0.1,
                              )
 
-        # set the focus of the curser
-        self.entry_username.focus()
 
         #第二个label
-        self.label_password = Label(self.reg,
+        self.label_set_password = Label(self.reg,
                                text="Password",
                                font=("Trebuchet MS",12))
 
-        self.label_password.place(relheight=0.1,
+        self.label_set_password.place(relheight=0.1,
                              relx=0.1,
                              rely=0.3)
 
         #第二个entry
-        self.entry_password = Entry(self.reg,
+        self.entry_set_password = Entry(self.reg,
                                font=("Trebuchet MS",12))
 
-        self.entry_password.place(relwidth=0.60,
+        self.entry_set_password.place(relwidth=0.60,
                              relheight=0.1,
                              relx=0.3,
                              rely=0.3)
 
-        self.entry_password.focus()
+        self.entry_set_password.focus()
 
         #第3个label
-        self.label_password = Label(self.reg,
+        self.label_again_password = Label(self.reg,
                                text="Confirm",
                                font=("Trebuchet MS",12))
 
-        self.label_password.place(relheight=0.1,
+        self.label_again_password.place(relheight=0.1,
                              relx=0.1,
                              rely=0.5)
 
         #第3个entry
-        self.entry_password = Entry(self.reg,
+        self.entry_again_password = Entry(self.reg,
                                font=("Trebuchet MS",12))
 
-        self.entry_password.place(relwidth=0.60,
+        self.entry_again_password.place(relwidth=0.60,
                              relheight=0.1,
                              relx=0.3,
                              rely=0.5)
-
-        self.entry_password.focus()
-
-
 
     def goAhead(self, name):
         if len(name) > 0 and self.login_flag()==1:
