@@ -50,12 +50,23 @@ class GUI:
                 flag=1
         return flag
 
-
     def login(self):
         # login window
         self.login = Toplevel()
+
+        ws = self.login.winfo_screenwidth()
+        hs = self.login.winfo_screenheight()
+        windowWidth = 800
+        windowHeight = 600
+        x = (ws/2) - (windowWidth/2)
+        y = (hs/2) - (windowHeight/2)
+
+        #setting window size & position
+        self.login.geometry("%dx%d+%d+%d" % (windowWidth,windowHeight,x,y))#width x height + startX + startY
+        self.login.attributes("-alpha", 1)
+
         # set the title
-        self.login.title("Welcome to our chat system!")
+        self.login.title("Welcome to [Undecided Name] Chat System")
         self.login.resizable(width=True,
                              height=True)
         self.login.configure(width=800,
@@ -63,71 +74,72 @@ class GUI:
         # create a Label
         self.welcome = Label(self.login,
                          image=self.image,
-                         text="Please login to continue",
+                        #  text="Please login to continue",
                          justify=CENTER,
-                         font="Helvetica 14 bold")
+                         font=("Trebuchet MS", 14, "bold"))
 
-        self.welcome.place(relheight=0.2,
-                       relx=0.2,
-                       rely=0.07)
+        self.welcome.place(relheight=0.6,
+                        relwidth=1,
+                       relx=0,
+                       rely=0)
         # create a Label
         self.label_user_name = Label(self.login,
-                               text="User name: ",
-                               font="Helvetica 12")
+                               text="Username",
+                               font=("Trebuchet MS", 12))
 
-        self.label_user_name.place(relheight=0.1,
-                             relx=0.1,
-                             rely=0.45)
+        self.label_user_name.place(relheight=0.05,
+                             relx=0.28,
+                             rely=0.65)
 
         # create a entry box for
-        # tyoing the message
+        # typing the message
         self.entry_username = Entry(self.login,
-                               font="Helvetica 14")
+                               font=("Trebuchet MS",12))
 
-        self.entry_username.place(relwidth=0.4,
-                             relheight=0.1,
-                             relx=0.35,
-                             rely=0.45)
+        self.entry_username.place(relwidth=0.30,
+                             relheight=0.05,
+                             relx=0.4,
+                             rely=0.65)
 
         # set the focus of the curser
         self.entry_username.focus()
 
         #第二个label
         self.label_password = Label(self.login,
-                               text="Password: ",
-                               font="Helvetica 12")
+                               text="Password",
+                               font=("Trebuchet MS",12))
 
-        self.label_password.place(relheight=0.1,
-                             relx=0.1,
-                             rely=0.65)
+        self.label_password.place(relheight=0.05,
+                             relx=0.28,
+                             rely=0.75)
 
         #第二个entry
         self.entry_password = Entry(self.login,
-                               font="Helvetica 14")
+                               font=("Trebuchet MS",12))
 
-        self.entry_password.place(relwidth=0.4,
-                             relheight=0.1,
-                             relx=0.35,
-                             rely=0.65)
+        self.entry_password.place(relwidth=0.30,
+                             relheight=0.05,
+                             relx=0.4,
+                             rely=0.75)
 
         self.entry_password.focus()
 
-        #做一个用来注册的页面
+        #这个是register button
         self.register=Button(self.login,
                               text="Register",
-                              font="Helvetica 14 bold",
+                              font=("Trebuchet MS", 14, "bold"),
                               )
-        self.register.place(relx=0.6,
-                            rely=0.8)
+        self.register.place(relx=0.55,
+                            rely=0.85)
 
         #这个是continue button
         self.go = Button(self.login,
                          text="Login",
-                         font="Helvetica 14 bold",
+                         font=("Trebuchet MS", 14, "bold"),
                          command=lambda: self.goAhead(self.entry_username.get()))
 
-        self.go.place(relx=0.4,
-                      rely=0.8)
+        self.go.place(relx=0.25,
+                      rely=0.85)
         self.Window.mainloop()
 
     def goAhead(self, name):
@@ -170,7 +182,7 @@ class GUI:
                                bg="#17202A",
                                fg="#EAECEE",
                                text=self.name,
-                               font="Helvetica 13 bold",
+                               font=("Trebuchet MS", 13, "bold"),
                                pady=5)
 
         self.labelHead.place(relwidth=1)
@@ -187,7 +199,7 @@ class GUI:
                              height=2,
                              bg="#17202A",
                              fg="#EAECEE",
-                             font="Helvetica 14",
+                             font=("Trebuchet MS", 14),
                              padx=5,
                              pady=5)
 
@@ -205,7 +217,7 @@ class GUI:
         self.entryMsg = Entry(self.labelBottom,
                               bg="#2C3E50",
                               fg="#EAECEE",
-                              font="Helvetica 13")
+                              font=("Trebuchet MS", 13))
 
         # place the given widget
         # into the gui window
@@ -219,7 +231,7 @@ class GUI:
         # create a Send Button
         self.buttonMsg = Button(self.labelBottom,
                                 text="Send",
-                                font="Helvetica 10 bold",
+                                font=("Trebuchet MS", 10, "bold"),
                                 width=20,
                                 bg="#ABB2B9",
                                 command=lambda: self.sendButton(self.entryMsg.get()))
