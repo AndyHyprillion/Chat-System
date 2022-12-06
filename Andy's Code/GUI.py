@@ -1,13 +1,3 @@
-'''
-Author: AndyYe
-Date: 2022-12-01 14:49:20
-LastEditors: AndyYe
-LastEditTime: 2022-12-01 17:08:28
-FilePath: \GroupWork\GUI.py
-Description: 
-
-Copyright (c) 2022 by AndyYe, All Rights Reserved. 
-'''
 from tkinter import *
 
 
@@ -22,15 +12,15 @@ class chatSystem:
             bg="darkblue",
             fg = "white"
             )
-        self.title.place(width=windowWidth, height=windowHeight/4,x=0,y=0)
+        self.title.place(relwidth=1, relheight=0.25,x=0,y=0)
 
         #button 1
         self.login_button = Button(parent, text="Login", command=self.login, justify="center",font=("Trebuchet MS", 20, "bold"),)
-        self.login_button.place(width = 400, height = 150, x = 0, y = 150)
+        self.login_button.place(relwidth = 0.5, relheight = 0.25, relx = 0, rely = 0.25)
 
         #button 2
         self.quit_button = Button(parent, text="Quit", fg="red", command=parent.destroy,font=("Trebuchet MS", 20, "bold"),)
-        self.quit_button.place(width = 400, height = 150, x = 400, y = 150)
+        self.quit_button.place(relwidth = 0.5, relheight = 0.25, relx = 0.5, rely = 0.25)
              
         #entry_username
         self.entry_username = Entry(parent,font=("Trebuchet MS", 20, "bold"),)
