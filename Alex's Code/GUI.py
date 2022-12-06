@@ -50,6 +50,7 @@ class GUI:
                 flag=1
         return flag
 
+
     def login(self):
         # login window
         self.login = Toplevel()
@@ -110,6 +111,14 @@ class GUI:
                              rely=0.65)
 
         self.entry_password.focus()
+
+        #做一个用来注册的页面
+        self.register=Button(self.login,
+                              text="Register",
+                              font="Helvetica 14 bold",
+                              )
+        self.register.place(relx=0.6,
+                            rely=0.8)
 
         #这个是continue button
         self.go = Button(self.login,
