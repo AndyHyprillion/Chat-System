@@ -14,6 +14,7 @@ from tkinter import font
 from tkinter import ttk
 from chat_utils import *
 import json
+import random
 
 # GUI class for the chat
 
@@ -30,7 +31,8 @@ class GUI:
         self.socket = s
         self.my_msg = ""
         self.system_msg = ""
-        self.image=PhotoImage(file="R.png") #改这个路径即可
+        self.image=PhotoImage(file="pict_1.png") #改这个路径即可
+        
 
     #加入了账号密码判断,已经实现了只有在txt中的账号密码可以登录
     def login_flag(self):
@@ -115,12 +117,14 @@ class GUI:
 
         #第二个entry
         self.entry_password = Entry(self.login,
-                               font=("Trebuchet MS",12))
+                               font=("Trebuchet MS",12),
+                               show="*")
 
         self.entry_password.place(relwidth=0.30,
                              relheight=0.05,
                              relx=0.4,
-                             rely=0.75)
+                             rely=0.75,
+                             )
 
         self.entry_password.focus()
 
@@ -132,7 +136,97 @@ class GUI:
 
         self.go.place(relx=0.25,
                       rely=0.85)
+
+        #这个是register button
+        self.register=Button(self.login,
+                              text="Register",
+                              font=("Trebuchet MS", 14, "bold"),
+                              command=lambda: self.reg())
+        self.register.place(relx=0.55,
+                            rely=0.85)
+        
         self.Window.mainloop()
+
+    def reg(self):
+
+        self.reg = Toplevel()
+        
+        ws = self.reg.winfo_screenwidth()
+        hs = self.reg.winfo_screenheight()
+        windowWidth = 400
+        windowHeight = 300
+        x = (ws/2) - (windowWidth/2)
+        y = (hs/2) - (windowHeight/2)
+
+        #setting window size & position
+        self.reg.geometry("%dx%d+%d+%d" % (windowWidth,windowHeight,x,y))#width x height + startX + startY
+        print("here")
+
+        # create a Label
+        self.label_user_name = Label(self.reg,
+                               text="Username",
+                               font=("Trebuchet MS", 12))
+
+        self.label_user_name.place(relheight=0.1,
+                             relx=0.1,
+                             rely=0.1)
+
+        # create a entry box for
+        # typing the message
+        self.entry_username = Entry(self.reg,
+                               font=("Trebuchet MS",12),
+                               )
+
+        self.entry_username.place(relwidth=0.60,
+                             relheight=0.1,
+                             relx=0.3,
+                             rely=0.1,
+                             )
+
+        # set the focus of the curser
+        self.entry_username.focus()
+
+        #第二个label
+        self.label_password = Label(self.reg,
+                               text="Password",
+                               font=("Trebuchet MS",12))
+
+        self.label_password.place(relheight=0.1,
+                             relx=0.1,
+                             rely=0.3)
+
+        #第二个entry
+        self.entry_password = Entry(self.reg,
+                               font=("Trebuchet MS",12))
+
+        self.entry_password.place(relwidth=0.60,
+                             relheight=0.1,
+                             relx=0.3,
+                             rely=0.3)
+
+        self.entry_password.focus()
+
+        #第3个label
+        self.label_password = Label(self.reg,
+                               text="Confirm",
+                               font=("Trebuchet MS",12))
+
+        self.label_password.place(relheight=0.1,
+                             relx=0.1,
+                             rely=0.5)
+
+        #第3个entry
+        self.entry_password = Entry(self.reg,
+                               font=("Trebuchet MS",12))
+
+        self.entry_password.place(relwidth=0.60,
+                             relheight=0.1,
+                             relx=0.3,
+                             rely=0.5)
+
+        self.entry_password.focus()
+
+
 
     def goAhead(self, name):
         if len(name) > 0 and self.login_flag()==1:
