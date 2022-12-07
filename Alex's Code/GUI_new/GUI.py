@@ -10,6 +10,7 @@ Created on Fri Apr 30 13:36:58 2021
 import threading
 import select
 from tkinter import *
+import tkinter.messagebox
 from tkinter import font
 from tkinter import ttk
 from chat_utils import *
@@ -184,8 +185,10 @@ class GUI:
 
         # create a entry box for
         # typing the message
+        set_username=tkinter.StringVar()
         self.entry_set_username = Entry(self.reg,
                                font=("Trebuchet MS",12),
+                               textvariable=set_username
                                )
 
         self.entry_set_username.place(relwidth=0.60,
@@ -205,8 +208,11 @@ class GUI:
                              rely=0.3)
 
         #第二个entry
+        set_password = tkinter.StringVar()
         self.entry_set_password = Entry(self.reg,
-                               font=("Trebuchet MS",12))
+                               font=("Trebuchet MS",12),
+                               textvariable = set_password
+                                        )
 
         self.entry_set_password.place(relwidth=0.60,
                              relheight=0.1,
@@ -216,9 +222,12 @@ class GUI:
         self.entry_set_password.focus()
 
         #第3个label
+        set_confirm_password = tkinter.StringVar()
         self.label_again_password = Label(self.reg,
                                text="Confirm",
-                               font=("Trebuchet MS",12))
+                               font=("Trebuchet MS",12),
+                               textvariable=set_confirm_password
+                                          )
 
         self.label_again_password.place(relheight=0.1,
                              relx=0.1,
@@ -242,7 +251,7 @@ class GUI:
         self.register_confirm.place(relx=0.45,
                                     rely=0.75)
 
-    #奇怪的是，它更新不下去，但它仍然能在文档中打出一个逗号，看来是get entry的问题
+    #奇怪的是，它更新不下去，但它仍然能在文档中打出一个逗号，看来是get entry的问题。
     def update_data(self):
         if self.entry_set_password.get()==self.entry_again_password.get():
             flag_for_username = 0
@@ -256,19 +265,22 @@ class GUI:
                 data_dict[temp_list[0]] = temp_list[1]
             f.close()
 
+            # tkinter.messagebox.showinfo(title='Hi', message="你好") ，可以拿这个东西来当print用，来debug
+
             for keys in data_dict.keys():
                 if keys == self.entry_set_username.get():
                     flag_for_username = 1
 
-            if flag_for_username != 1:
+            if flag_for_username != 1:    # 我发现这个if不运行，好像是因为一开始entry没有值，这怎么办？
                 f = open("login.txt", "a")
                 f.write(self.entry_set_username.get() + "," + self.entry_set_password.get() + "\n")
                 f.close()
 
             else:
-                print("please change the username")
-        else:
-            print("please check your password")
+                tkinter.messagebox.showerror('Error', 'Please find another username!')
+        else: #这个好像也不运行
+            tkinter.messagebox.showerror('Error', 'Password and confirm password must be the same!')
+
 
     def goAhead(self, name):
         if len(name) > 0 and self.login_flag()==1:
