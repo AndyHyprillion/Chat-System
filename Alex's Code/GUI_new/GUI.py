@@ -222,11 +222,11 @@ class GUI:
         self.entry_set_password.focus()
 
         #第3个label
-        set_confirm_password = tkinter.StringVar()
+        # set_confirm_password = tkinter.StringVar()
         self.label_again_password = Label(self.reg,
                                text="Confirm",
                                font=("Trebuchet MS",12),
-                               textvariable=set_confirm_password
+                            #    textvariable=set_confirm_password
                                           )
 
         self.label_again_password.place(relheight=0.1,
@@ -246,12 +246,11 @@ class GUI:
         self.register_confirm=Button(self.reg,
                               text="Confirm",
                               font=("Trebuchet MS", 14, "bold"),
-                              command=self.update_data())
+                              command=self.update_data)
 
         self.register_confirm.place(relx=0.45,
                                     rely=0.75)
 
-    #奇怪的是，它更新不下去，但它仍然能在文档中打出一个逗号，看来是get entry的问题。
     def update_data(self):
         if self.entry_set_password.get()==self.entry_again_password.get():
             flag_for_username = 0
@@ -265,22 +264,23 @@ class GUI:
                 data_dict[temp_list[0]] = temp_list[1]
             f.close()
 
-            # tkinter.messagebox.showinfo(title='Hi', message="你好") ，可以拿这个东西来当print用，来debug
+            # tkinter.messagebox.showinfo(title='Hi', message="你好") 
+            # ，可以拿这个东西来当print用，来debug
 
             for keys in data_dict.keys():
                 if keys == self.entry_set_username.get():
                     flag_for_username = 1
 
-            if flag_for_username != 1:    # 我发现这个if不运行，好像是因为一开始entry没有值，这怎么办？
+            if flag_for_username != 1:
                 f = open("login.txt", "a")
                 f.write(self.entry_set_username.get() + "," + self.entry_set_password.get() + "\n")
                 f.close()
+                self.reg.destroy()
 
             else:
                 tkinter.messagebox.showerror('Error', 'Please find another username!')
-        else: #这个好像也不运行
+        else:
             tkinter.messagebox.showerror('Error', 'Password and confirm password must be the same!')
-
 
     def goAhead(self, name):
         if len(name) > 0 and self.login_flag()==1:
@@ -313,24 +313,28 @@ class GUI:
         # to show chat window
         self.Window.deiconify()
         self.Window.title("CHATROOM")
-        self.Window.resizable(width=False,
-                              height=False)
+        self.Window.resizable(width=True,
+                              height=True)
         self.Window.configure(width=470,
                               height=550,
                               bg="#17202A")
         self.labelHead = Label(self.Window,
                                bg="#17202A",
                                fg="#EAECEE",
-                               text=self.name,
+                               text="Welcome: "+self.name,
                                font=("Trebuchet MS", 13, "bold"),
+                               padx=5,
                                pady=5)
 
-        self.labelHead.place(relwidth=1)
+        self.labelHead.place(relwidth=1,
+                             relx=0.1)
+
         self.line = Label(self.Window,
                           width=450,
                           bg="#ABB2B9")
 
         self.line.place(relwidth=1,
+                        relx=0.1,
                         rely=0.07,
                         relheight=0.012)
 
@@ -340,11 +344,12 @@ class GUI:
                              bg="#17202A",
                              fg="#EAECEE",
                              font=("Trebuchet MS", 14),
-                             padx=5,
+                             padx=50,
                              pady=5)
 
         self.textCons.place(relheight=0.745,
                             relwidth=1,
+                            relx=0.1,
                             rely=0.08)
 
         self.labelBottom = Label(self.Window,
@@ -353,6 +358,25 @@ class GUI:
 
         self.labelBottom.place(relwidth=1,
                                rely=0.825)
+        #尝试(可以改改宽度)(这里设置了左侧按钮区域)
+        self.labelLeft1 = Label(self.Window,
+                                 bg="#ABB2B9",
+                                 width=10)
+
+        self.labelLeft1.place(relheight=1,
+                               relx=0)
+
+        self.testbutton = Button(self.labelLeft1, #所有的button都在整个label上，功能可以自己改，仿造这个格式即可
+                                text="Test",
+                                font=("Trebuchet MS", 10, "bold"),
+                                width=10,
+                                bg="#ABB4B2",
+                                    )
+        self.testbutton.place(relwidth=0.74,
+                              relheight=0.06,
+                              rely=0.008,
+                              relx=0.111)
+        #尝试
 
         self.entryMsg = Entry(self.labelBottom,
                               bg="#2C3E50",
@@ -364,7 +388,7 @@ class GUI:
         self.entryMsg.place(relwidth=0.74,
                             relheight=0.06,
                             rely=0.008,
-                            relx=0.011)
+                            relx=0.111)
 
         self.entryMsg.focus()
 
@@ -394,6 +418,8 @@ class GUI:
         scrollbar.config(command=self.textCons.yview)
 
         self.textCons.config(state=DISABLED)
+
+
 
     # function to basically start the thread for sending messages
 
