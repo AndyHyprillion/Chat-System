@@ -404,7 +404,7 @@ class GUI:
         self.entryMsg.place(relwidth=0.74,
                             relheight=0.06,
                             rely=0.008,
-                            relx=0.09)
+                            relx=0.15)
 
         self.entryMsg.focus()
 
