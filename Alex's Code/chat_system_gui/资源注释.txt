@@ -1,0 +1,15 @@
+background30_easy(240*240)
+background30_middle(480*480)
+background30_hard(900*480)
+blockbackground40_easy(320*320)
+background40_middle(640*640)
+background40_hard(1200*640)
+block&flag&mine30(30*30)
+block&flag&mine40(40*40)
+title(250*100)
+size_text(220*30)
+BOOM(随便多大都行)
+WIN(随便多大都行)
+mask_layer(比background40_hard(1200*640)大就行)
+
+所有图片必须经过软件imageMagDisplay打开再保存才可以加载到游戏中，具体原理不是很清楚
