@@ -41,10 +41,10 @@ while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:                                                  # 退出
                 pygame.quit()
-                sys.exit()
+                # sys.exit()
             elif 50 < x < 250 and 400 < y < 440 and event.type == pygame.MOUSEBUTTONDOWN:  # 退出
                 pygame.quit()
-                sys.exit()
+                # sys.exit()
             elif 50 < x < 250 and 150 < y < 190 and event.type == pygame.MOUSEBUTTONDOWN:  # 选择30像素大小方块
                 block_size = 30
 
@@ -112,10 +112,10 @@ while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:                                                  # 退出
                 pygame.quit()
-                sys.exit()
+                # sys.exit()
             elif 50 < x < 250 and 400 < y < 440 and event.type == pygame.MOUSEBUTTONDOWN:  # 退出
                 pygame.quit()
-                sys.exit()
+                # sys.exit()
             elif 50 < x < 250 and 100 < y < 140 and event.type == pygame.MOUSEBUTTONDOWN:  # 初级
                 screen = pygame.display.set_mode((block_size * 8, block_size * 8 + 40))
                 for x_1 in range(8):
@@ -297,7 +297,7 @@ while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
-                    sys.exit()
+                    # sys.exit()
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     screen.blit(background_1, (x_ready_screen, y_ready_screen), (x_ready_screen, y_ready_screen, block_size, block_size))
                     screen.blit(blockdown, (x_ready_screen, y_ready_screen))
@@ -392,7 +392,7 @@ while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
-                    sys.exit()
+                    # sys.exit()
 
                 if (x_ready, y_ready) in opened_list and event.type == pygame.MOUSEBUTTONDOWN:
                     for num in range(9):
@@ -571,10 +571,10 @@ while True:
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
                         pygame.quit()
-                        sys.exit()
+                        # sys.exit()
                     if x_4 - 100 < x < x_4 + 100 and y_4 + 100 < y < y_4 + 140 and event.type == pygame.MOUSEBUTTONDOWN:
                         pygame.quit()
-                        sys.exit()
+                        # sys.exit()
                     if x_4 - 100 < x < x_4 + 100 and y_4 + 50 < y < y_4 + 90 and event.type == pygame.MOUSEBUTTONDOWN:
                         running = False
                     if 20 < x < 100 and 20 < y < 60 and event.type == pygame.MOUSEBUTTONDOWN:
@@ -638,10 +638,10 @@ while True:
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
                         pygame.quit()
-                        sys.exit()
+                        # sys.exit()
                     if x_4 - 100 < x < x_4 + 100 and y_4 + 100 < y < y_4 + 140 and event.type == pygame.MOUSEBUTTONDOWN:
                         pygame.quit()
-                        sys.exit()
+                        # sys.exit()
                     if x_4 - 100 < x < x_4 + 100 and y_4 + 50 < y < y_4 + 90 and event.type == pygame.MOUSEBUTTONDOWN:
                         running = False
                     if 20 < x < 100 and 20 < y < 60 and event.type == pygame.MOUSEBUTTONDOWN:
