@@ -23,6 +23,13 @@ boom = pygame.image.load('others/BOOM.png')
 win = pygame.image.load('others/WIN.png')
 menu = pygame.image.load('choice/menu.png')
 
+#添加了一个存储功能,接下来要做的是需要判别是哪个client，把用户名填在后面；此外，再下一步是根据时间排序（插空）
+def store_time_used():
+    f = open("time_rank.txt", "a")
+    f.write(str(time_used)+"\n")
+    f.close()
+
+
 while True:
     screen = pygame.display.set_mode((300, 500))         # 选择界面
 
@@ -112,9 +119,11 @@ while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:                                                  # 退出
                 pygame.quit()
+                store_time_used()
                 # sys.exit()
             elif 50 < x < 250 and 400 < y < 440 and event.type == pygame.MOUSEBUTTONDOWN:  # 退出
                 pygame.quit()
+                store_time_used()
                 # sys.exit()
             elif 50 < x < 250 and 100 < y < 140 and event.type == pygame.MOUSEBUTTONDOWN:  # 初级
                 screen = pygame.display.set_mode((block_size * 8, block_size * 8 + 40))
@@ -297,6 +306,7 @@ while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
+                    store_time_used()
                     # sys.exit()
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     screen.blit(background_1, (x_ready_screen, y_ready_screen), (x_ready_screen, y_ready_screen, block_size, block_size))
@@ -308,10 +318,12 @@ while True:
 
             pygame.display.update()
 
+        #这里是time部分
         time_end = time.time()
         time_used = round((time_end - time_start), 3)
         time_used_img = myfont.render('time:' + str(time_used) + 's', True, gray)
         screen.blit(time_used_img, (block_size * mines_x_around - back, block_size * mines_y_around + font_h))
+
 
         for empty_coordinate in all_list:
             if empty_coordinate not in mines_list:
@@ -392,6 +404,7 @@ while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
+                    store_time_used()
                     # sys.exit()
 
                 if (x_ready, y_ready) in opened_list and event.type == pygame.MOUSEBUTTONDOWN:
@@ -571,9 +584,11 @@ while True:
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
                         pygame.quit()
+                        store_time_used()
                         # sys.exit()
                     if x_4 - 100 < x < x_4 + 100 and y_4 + 100 < y < y_4 + 140 and event.type == pygame.MOUSEBUTTONDOWN:
                         pygame.quit()
+                        store_time_used()
                         # sys.exit()
                     if x_4 - 100 < x < x_4 + 100 and y_4 + 50 < y < y_4 + 90 and event.type == pygame.MOUSEBUTTONDOWN:
                         running = False
@@ -638,9 +653,11 @@ while True:
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
                         pygame.quit()
+                        store_time_used()
                         # sys.exit()
                     if x_4 - 100 < x < x_4 + 100 and y_4 + 100 < y < y_4 + 140 and event.type == pygame.MOUSEBUTTONDOWN:
                         pygame.quit()
+                        store_time_used()
                         # sys.exit()
                     if x_4 - 100 < x < x_4 + 100 and y_4 + 50 < y < y_4 + 90 and event.type == pygame.MOUSEBUTTONDOWN:
                         running = False
